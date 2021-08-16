@@ -54,6 +54,8 @@ void screen_Menu() {
     //Starts menu, prints Title and game list with a highlighted game.
     mvwprintw(menuWin, 1, 3, "Bet Simulator");
 
+    /*  ~~ last edit ended here, everything below is the placeholder menu from other code. ~~*/
+
     string menu[4] = { "op1", "op2", "op3", "op4" };
 
     int highlight = 0;
