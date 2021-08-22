@@ -4,7 +4,7 @@
 /*                    -menu let's user select and enter a game.           */
 /* Author name:      Renato Pepe       				                      */
 /* Creation date:    16/08/2021                                           */
-/* Revision date:    16/08/2021                                           */
+/* Revision date:    20/08/2021                                           */
 /* ************************************************************************/
 
 /*
@@ -15,6 +15,7 @@
 #include <list>
 #include <string>
 #include "curses.h"
+#include "gameRun.h"
 #include "menu.h"
 
 /*
@@ -31,73 +32,90 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  16/08/2021
-Last modified:  16/08/2021
+Last modified:  20/08/2021
 */
-void screen_Menu() {
+void screen_Menu(float& playerWallet, float& chipValue, gameState& state, WINDOW *&gameWindow) {
+    //Clear what was previously printed on the screen and box the screen
+    wclear(gameWindow);
+    wrefresh(gameWindow);
+    box(gameWindow, 0, 0);
 
-    //Get size of the default curses screen (size of the terminal).
-    int xMax, yMax;
-    getmaxyx(stdscr, yMax, xMax);
+    //Print title at the top of the screen
+    wattron(gameWindow, A_BOLD | A_REVERSE);
+    mvwprintw(gameWindow, 2, (screen_Width/2) - 10, "Bet Simulator");
+    wattroff(gameWindow, A_BOLD | A_REVERSE);
 
-    //Check if the terminal size is big enough to properly run the menu screen.
-    if (xMax < menuScreen_Width || yMax < menuScreen_Height) {
-        cout << "Ops, your terminal screen current size is less than the minimum size required for this game\n";
-        return;
-    }
+    mvwprintw(gameWindow, 4, 4, "Wallet: $");
+    wprintw(gameWindow, (std::to_string((int)playerWallet)).c_str());
+    mvwprintw(gameWindow, 6, 4, "Games:");
 
-    //Creates and configure menu window
-    WINDOW* menuWin = newwin(menuScreen_Height, menuScreen_Width, 2, 2);
-    keypad(menuWin, true);
-    box(menuWin, 0, 0);
-    wrefresh(menuWin);
+    //Makes a list of the games (the names are hardcoded here since it's the only time they are needed)
+    string menuText[numberOfGames] = { "-Dice", "-Loot box"};
 
-    //Starts menu, prints Title and game list with a highlighted game.
-    mvwprintw(menuWin, 1, 3, "Bet Simulator");
-
-    /*  ~~ last edit ended here, everything below is the placeholder menu from other code. ~~*/
-
-    string menu[4] = { "op1", "op2", "op3", "op4" };
-
+    /*
+        Menu variables
+    */
+    //Highligh keeps track of what option is being selected
     int highlight = 0;
+    //Key stores user input
     int key;
     while (1) {
-        for (int i = 0; i < 4; i++) {
+        //Print options and highlights selected option
+        for (int i = 0; i < numberOfGames; i++) {
             if (i == highlight) {
-                wattron(menuWin, A_REVERSE);
+                wattron(gameWindow, A_REVERSE);
             }
-            mvwprintw(menuWin, 3 + i, 1, menu[i].c_str());
+            mvwprintw(gameWindow, 7 + i, 6, menuText[i].c_str());
             if (i == highlight) {
-                wattroff(menuWin, A_REVERSE);
+                wattroff(gameWindow, A_REVERSE);
             }
         }
 
-        key = wgetch(menuWin);
+        //Get user input
+        key = wgetch(gameWindow);
 
+        //Changes option being highlighted, enter game, or end program according to user input
         if (key == KEY_DOWN) {
             highlight++;
-            if (highlight > 3) {
+            if (highlight > (numberOfGames - 1)) {
                 highlight = 0;
             }
         }
         else if (key == KEY_UP) {
             highlight--;
             if (highlight < 0) {
-                highlight = 3;
+                highlight = (numberOfGames - 1);
             }
         }
-        else if (key == 'q') {
+        else if (key == 'x') {
+            state = gameState::EXIT;
+            return;
+            break;
+        }
+        else if (key == 'e') {
             break;
         }
         else {
-            //nothing
+            //Other keys do nothing
         }
     }
-    refresh();
-    mvprintw(3, 9, "You chose: %s ", menu[highlight].c_str());
-    refresh();
-    wgetch(menuWin);
-    //_getch();
+    
+    //Changes game state according to selected option.
+    switch (highlight) {
+    case 0:
+        state = gameState::GAME1;
+        break;
+    case 1:
+        state = gameState::GAME2;
+        break;
+    case 2:
+        //for future games
+        break;
+    default:
+        //Should never enter here
+        state = gameState::EXIT;
+        break;
+    }
 
-
-    delwin(menuWin);
+    wrefresh(gameWindow);
 }

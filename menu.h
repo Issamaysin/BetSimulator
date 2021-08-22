@@ -5,15 +5,16 @@
 /*                    -menu let's user select and enter a game.           */
 /* Author name:      Renato Pepe       				                      */
 /* Creation date:    16/08/2021                                           */
-/* Revision date:    16/08/2021                                           */
+/* Revision date:    20/08/2021                                           */
 /* ************************************************************************/
 
+//#include "gameRun.h"
 
 /*
-	Variable definitions
+	Defines and enums
 */
-#define menuScreen_Height 20
-#define menuScreen_Width 60
+#define screen_Height 20
+#define screen_Width 60
 #define numberOfGames 2
 
 /*
@@ -23,6 +24,6 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  16/08/2021
-Last modified:  16/08/2021
+Last modified:  20/08/2021
 */
-void screen_Menu();
+void screen_Menu(float& playerWallet, float& chipValue, gameState& state, WINDOW*& gameWindow);
