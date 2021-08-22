@@ -2,7 +2,7 @@
 
   Welcome to Bet simulator, a simple game developed in C++, using the Visual Studio IDE and the PDcurses library (https://github.com/wmcbrine/PDCurses), that simulates betting on a variety of different games of chance. 
 
-  User starts with $1000 on the wallet and can select between the available games to bet, the wallet is shared between games, which means user can go back to the main menu and switch between games but keep the profits. User can select the bet value through a,s,d,w and arrow keys, where w/up and s/down will increase/decrease the ammount, a/left and d/right will decrease/increase the chip value (chip vaule is the ammount that will be increased/decreased with the a/s/up/down commands).
+  User starts with $1000 on the wallet and can select between the available games to bet, the wallet is shared between games, which means user can go back to the main menu and switch between games but keep the profits. User can select the bet value through a,s,d,w and arrow keys, where w/up and s/down will increase/decrease the bet ammount, a/left and d/right will decrease/increase the chip value (chip vaule is the ammount that will be increased/decreased with the a/s/up/down commands).
 
  Controls: 
 
@@ -16,8 +16,28 @@
 
   x             => exit program
 
++Game 1 (Dice) :
 
-+Games:
+  a / left_key  => lower chips value
+
+  d / right_key => increases chips value
+
+  w / up_key    => increases bet (ammount increase = chip value)
+
+  s / down_key  => decreases bet (ammount decrease = chip value)
+
+  e / enter     => make a bet
+
+  q             => exit to main menu
+
+  1/2/3/4/5/6   => place a number bet
+
+  h/l           => place a High/Low bet
+
+  0             => withdraw both number and H/L bets
+
+
++Game 2 (Loot Box) :
 
   a / left_key  => lower chips value
 
