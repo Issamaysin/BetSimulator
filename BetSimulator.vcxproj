@@ -146,9 +146,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BetSimulator.cpp" />
+    <ClCompile Include="gameRun.cpp" />
+    <ClCompile Include="game_Dice.cpp" />
     <ClCompile Include="menu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gameRun.h" />
+    <ClInclude Include="game_Dice.h" />
     <ClInclude Include="menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

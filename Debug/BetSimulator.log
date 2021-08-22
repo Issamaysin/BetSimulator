@@ -1,6 +1,3 @@
-﻿  BetSimulator.cpp
-C:\Users\User\source\repos\BetSimulator\BetSimulator.cpp(70,9): warning C4551: function call missing argument list
-C:\Users\User\source\repos\BetSimulator\BetSimulator.cpp(102,39): warning C4305: 'initializing': truncation from 'double' to 'float'
-  menu.cpp
-  Generating Code...
+﻿  gameRun.cpp
+C:\Users\User\source\repos\BetSimulator\gameRun.cpp(53,9): warning C4551: function call missing argument list
   BetSimulator.vcxproj -> C:\Users\User\source\repos\BetSimulator\Debug\BetSimulator.exe

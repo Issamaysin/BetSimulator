@@ -21,9 +21,21 @@
     <ClCompile Include="menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="gameRun.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_Dice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameRun.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_Dice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
