@@ -2,11 +2,11 @@
 
 /* **************************************************************************/
 /* File name:        gameRun.h                                              */
-/* File description: Header file where main game loop, core initializations */
-/*                    and auxiliar methods are declared                     */
+/* File description: Header file where main game loop, core initializations,*/
+/*                     auxiliar methods and types are declared              */
 /* Author name:      Renato Pepe       				                        */
 /* Creation date:    16/08/2021                                             */
-/* Revision date:    18/08/2021                                             */
+/* Revision date:    22/08/2021                                             */
 /* **************************************************************************/
 
 
@@ -18,6 +18,13 @@ enum class gameState {MENU,      //Main menu where games are selected
                       GAME1,     //Dice game
                       GAME2,     //Loot box game
                       EXIT };    //State that can be set by the menu to end the program.
+
+//Color pairs
+#define CP_RED      1
+#define CP_GREEN    2
+#define CP_BLUE     3
+#define CP_ORANGE   4
+#define CP_PURPLE   5
 
 /*
     Function declarations
@@ -41,7 +48,7 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  18/08/2021
-Last modified:  18/08/2021
+Last modified:  22/08/2021
 */
 void gameInit();
 
@@ -52,6 +59,30 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  18/08/2021
-Last modified:  18/08/2021
+Last modified:  20/08/2021
 */
 void gameLoop();
+
+/*
+Method name:    initColorPairs
+Description:    Define the color pairs that will be used on all games.
+Outputs:        n/a
+Inputs:         n/a
+Author:         Renato Pepe
+Creation date:  22/08/2021
+Last modified:  22/08/2021
+*/
+void initColorPairs();
+
+
+/*
+Method name:    changeChipValue
+Description:    Increase or decrease the chip value according to user input
+Outputs:        n/a
+Inputs:         n/a
+Author:         Renato Pepe
+Creation date:  22/08/2021
+Last modified:  22/08/2021
+*/
+void changeChipValue(float& chipValue, char increaseOrDecrease);
+
