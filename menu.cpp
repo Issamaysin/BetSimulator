@@ -4,7 +4,7 @@
 /*                    -menu let's user select and enter a game.           */
 /* Author name:      Renato Pepe       				                      */
 /* Creation date:    16/08/2021                                           */
-/* Revision date:    20/08/2021                                           */
+/* Revision date:    24/08/2021                                           */
 /* ************************************************************************/
 
 /*
@@ -25,14 +25,18 @@ using std::cout;
 using std::list;
 using std::string;
 
+
 /*
 Method name:    screen_Menu
 Description:    Display the Menu where user can select the game they'll be playing, and run the selected game.
 Outputs:        n/a
-Inputs:         n/a
+Inputs:         float playerWallet: Player's current cash
+                float chipValue: Current chip value
+                gameState state: Current game state, so menu can change it to a game according to user input
+                WINDOW gameWindow: Curses window where simulator happens
 Author:         Renato Pepe
 Creation date:  16/08/2021
-Last modified:  20/08/2021
+Last modified:  24/08/2021
 */
 void screen_Menu(float& playerWallet, float& chipValue, gameState& state, WINDOW *&gameWindow) {
     //Clear what was previously printed on the screen and box the screen
@@ -75,24 +79,24 @@ void screen_Menu(float& playerWallet, float& chipValue, gameState& state, WINDOW
         key = wgetch(gameWindow);
 
         //Changes option being highlighted, enter game, or end program according to user input
-        if (key == KEY_DOWN) {
+        if (key == KEY_DOWN || key == 's' || key == 'S') {
             highlight++;
             if (highlight > (numberOfGames - 1)) {
                 highlight = 0;
             }
         }
-        else if (key == KEY_UP) {
+        else if (key == KEY_UP || key == 'w' || key == 'W') {
             highlight--;
             if (highlight < 0) {
                 highlight = (numberOfGames - 1);
             }
         }
-        else if (key == 'x') {
+        else if (key == 'x' || key == 'X') {
             state = gameState::EXIT;
             return;
             break;
         }
-        else if (key == 'e') {
+        else if (key == 'e' || key == 'E') {
             break;
         }
         else {
@@ -113,9 +117,8 @@ void screen_Menu(float& playerWallet, float& chipValue, gameState& state, WINDOW
         break;
     default:
         //Should never enter here
-        state = gameState::EXIT;
+        state = gameState::MENU;
         break;
     }
-
     wrefresh(gameWindow);
 }
