@@ -4,7 +4,7 @@
 /*                    and auxiliar methods are defined                   */
 /* Author name:      Renato Pepe       				                     */
 /* Creation date:    16/08/2021                                          */
-/* Revision date:    22/08/2021                                          */
+/* Revision date:    24/08/2021                                          */
 /* ***********************************************************************/
 
 
@@ -60,7 +60,7 @@ int startCurses() {
 
     //Remove blinking cursor indicator and start keypad mode (can read keyboard arrows)
     curs_set(0);
-    keypad(stdscr, true);
+    keypad(stdscr, TRUE);
 
     return 1;
 }
@@ -72,12 +72,12 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  18/08/2021
-Last modified:  22/08/2021
+Last modified:  24/08/2021
 */
 void gameInit() {
 
     //Tells user to maximize terminal screen so curses can work properly
-    cout << "Maximize your terminal screen for a better performance then press any key \n";
+    cout << "Maximize your terminal screen for a better performance, then press any key to continue \n";
     _getch();
 
     //Start random number generator, give it a seed based on the user's PC time;
@@ -99,7 +99,7 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  18/08/2021
-Last modified:  20/08/2021
+Last modified:  24/08/2021
 */
 void gameLoop() {
 
@@ -115,8 +115,11 @@ void gameLoop() {
 
     //Creates and configure window
     WINDOW* gameWindow = newwin(screen_Height, screen_Width, 2, 2);
-    keypad(gameWindow, true);
+    keypad(gameWindow, TRUE);
     wrefresh(gameWindow);
+
+    //print here the introduction, talking about the simulator and menu commands.
+    printStartScreen(gameWindow);
 
     /*
         Declarations and definition of variables.
@@ -131,6 +134,26 @@ void gameLoop() {
 
     //Main loop.
     while (gameState::EXIT != currentState) {
+        //check if player lost (Wallet = 0), print a defeat screen, reset values to default, and start again
+        if (0 >= playerWallet) {
+            //Print defeat screen
+            printDefeatScreen(gameWindow);
+
+            //Reset values to default so it can start again.
+            playerWallet = 2000.0f;
+            chipValue = 100.0f;
+        }
+        //check if player won (Wallet = 999999), print a victory screen, reset values to default, and start again
+        if (999999 <= playerWallet) {
+            //Print victory screen
+            printVictoryScreen(gameWindow);
+
+            //Reset values to default so it can start again.
+            playerWallet = 2000.0f;
+            chipValue = 100.0f;
+        }
+
+        //Enter Menu or game
         switch (currentState) {
         case gameState::MENU:
             screen_Menu(playerWallet, chipValue, currentState, gameWindow);;
@@ -140,13 +163,12 @@ void gameLoop() {
             currentState = gameState::MENU;
             break;
         case gameState::GAME2:
-            cout << "\nTEST game2\n";
-            currentState = gameState::EXIT;
             //run game 2
+            currentState = gameState::MENU;
             break;
-
         default:
-            //should never enter here (I will think of an appropriate response)
+            //should never enter here
+            currentState = gameState::MENU;
             break;
         }
 
@@ -154,7 +176,6 @@ void gameLoop() {
 
     //Delete screen (free memory)
     delwin(gameWindow);
-
 }
 
 
@@ -177,7 +198,8 @@ void initColorPairs() {
 Method name:    changeChipValue
 Description:    Increase or decrease the chip value according to user input
 Outputs:        n/a
-Inputs:         n/a
+Inputs:         float chipValue: current chip value
+                char increaseOrDecrease: flag to check it chip is gonna increase ('+') or decrease('-')
 Author:         Renato Pepe
 Creation date:  22/08/2021
 Last modified:  22/08/2021
@@ -225,4 +247,110 @@ void changeChipValue(float &chipValue, char increaseOrDecrease) {
     else if ('+' == increaseOrDecrease && 8 != currentArrayPosition) {
         chipValue = availableChips[currentArrayPosition + 1];
     }
+}
+
+/*
+Method name:    printDefeatScreen
+Description:    Prints a screen to let player know he lost the game (wallet reached 0)
+Outputs:        n/a
+Inputs:         WINDOW gameWindow: game window where information will be printed
+Author:         Renato Pepe
+Creation date:  24/08/2021
+Last modified:  24/08/2021
+*/
+void printDefeatScreen(WINDOW* gameWindow) {
+    //Clear what was previously printed on the screen and box the screen
+    wclear(gameWindow);
+    wrefresh(gameWindow);
+    box(gameWindow, 0, 0);
+
+    //Writes "you lost" text
+    int line = 2;
+    wattron(gameWindow, COLOR_PAIR(CP_RED));
+    mvwprintw(gameWindow, line++, 18, "G A M E   O V E R");
+    wattroff(gameWindow, COLOR_PAIR(CP_RED));
+    line++;
+    mvwprintw(gameWindow, line++, 7, "You gambled away all your money and lost.");
+    chtype sadFaceAux = ' ' | A_REVERSE;
+    mvwaddch(gameWindow, 10, 24, sadFaceAux);
+    mvwaddch(gameWindow, 12, 24, sadFaceAux);
+    mvwaddch(gameWindow, 10, 27, sadFaceAux);
+    mvwaddch(gameWindow, 11, 27, sadFaceAux);
+    mvwaddch(gameWindow, 12, 27, sadFaceAux);
+    mvwaddch(gameWindow, 9, 28, sadFaceAux);
+    mvwaddch(gameWindow, 8, 29, sadFaceAux);
+    mvwaddch(gameWindow, 13, 28, sadFaceAux);
+    mvwaddch(gameWindow, 14, 29, sadFaceAux);
+    mvwprintw(gameWindow, screen_Height - 2, 15, "(press any key to start over)");
+    
+    //Waits for user to press any key to continue
+    wgetch(gameWindow);
+}
+
+
+/*
+Method name:    printVictoryScreen
+Description:    Prints a screen to let player know he won the game (wallet reached max value o 999.999)
+Outputs:        n/a
+Inputs:         WINDOW gameWindow: game window where information will be printed
+Author:         Renato Pepe
+Creation date:  24/08/2021
+Last modified:  24/08/2021
+*/
+void printVictoryScreen(WINDOW* gameWindow) {
+    //Clear what was previously printed on the screen and box the screen
+    wclear(gameWindow);
+    wrefresh(gameWindow);
+    box(gameWindow, 0, 0);
+
+    //Writes "you won" text
+    int line = 2;
+    int auxCongratulationsXPosition = 15;
+    wattron(gameWindow, COLOR_PAIR(CP_GREEN));
+    mvwprintw(gameWindow, line++, auxCongratulationsXPosition, "C O N G R A T U L A T I O N S");
+    wattroff(gameWindow, COLOR_PAIR(CP_GREEN));
+    line++;
+    mvwprintw(gameWindow, line++, 5, "You have become a millionaire!");
+    line++;
+    mvwprintw(gameWindow, line++, 5, "Unfortunately the cassino can't handle any more loses");
+    mvwprintw(gameWindow, line++, 2, "and it's kicking you out. Go enjoy your new fortune!");
+
+    mvwprintw(gameWindow, screen_Height - 2, 15, "(press any key to start over)");
+    //Waits for user to press any key to continue (twice so user don't skip this screen acidentally, since it's really hard to get here)
+    wgetch(gameWindow);
+    wgetch(gameWindow);
+}
+
+
+
+/*
+Method name:    printStartScreen
+Description:    Prints screen that introduces the simulator and displays Menu commands.
+Outputs:        n/a
+Inputs:         WINDOW gameWindow: game window where information will be printed
+Author:         Renato Pepe
+Creation date:  24/08/2021
+Last modified:  24/08/2021
+*/
+void printStartScreen(WINDOW* gameWindow) {
+    //Clear what was previously printed on the screen and box the screen
+    wclear(gameWindow);
+    wrefresh(gameWindow);
+    box(gameWindow, 0, 0);
+
+    int line = 2;
+    mvwprintw(gameWindow, line++, 12, "Welcome to the Bet simulator");
+    line++;
+    mvwprintw(gameWindow, line++, 1, "-You can select between the available games to make bets.");
+    line++;
+    mvwprintw(gameWindow, line++, 1, "-Menu controls:");
+    line++;
+    mvwprintw(gameWindow, line++, 2, "UP/DOWN arrows: select between games");
+    mvwprintw(gameWindow, line++, 2, "E:              enter a game");
+    mvwprintw(gameWindow, line++, 2, "X:              exit simulator");
+    line++;
+    mvwprintw(gameWindow, line++, 2, "(w/a/s/d will work the same as arrows)");
+
+    mvwprintw(gameWindow, screen_Height - 2, 15, "(press any key to continue)");
+    wgetch(gameWindow);
 }

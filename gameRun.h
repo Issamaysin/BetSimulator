@@ -6,7 +6,7 @@
 /*                     auxiliar methods and types are declared              */
 /* Author name:      Renato Pepe       				                        */
 /* Creation date:    16/08/2021                                             */
-/* Revision date:    22/08/2021                                             */
+/* Revision date:    24/08/2021                                             */
 /* **************************************************************************/
 
 
@@ -48,7 +48,7 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  18/08/2021
-Last modified:  22/08/2021
+Last modified:  24/08/2021
 */
 void gameInit();
 
@@ -79,10 +79,45 @@ void initColorPairs();
 Method name:    changeChipValue
 Description:    Increase or decrease the chip value according to user input
 Outputs:        n/a
-Inputs:         n/a
+Inputs:         float chipValue: current chip value
+                char increaseOrDecrease: flag to check it chip is gonna increase ('+') or decrease('-')
 Author:         Renato Pepe
 Creation date:  22/08/2021
 Last modified:  22/08/2021
 */
 void changeChipValue(float& chipValue, char increaseOrDecrease);
+
+/*
+Method name:    printDefeatScreen
+Description:    Prints a screen to let player know he lost the game (wallet reached 0)
+Outputs:        n/a
+Inputs:         WINDOW gameWindow: game window where information will be printed
+Author:         Renato Pepe
+Creation date:  24/08/2021
+Last modified:  24/08/2021
+*/
+void printDefeatScreen(WINDOW* gameWindow);
+
+
+/*
+Method name:    printVictoryScreen
+Description:    Prints a screen to let player know he won the game (wallet reached max value o 999.999)
+Outputs:        n/a
+Inputs:         WINDOW gameWindow: game window where information will be printed
+Author:         Renato Pepe
+Creation date:  24/08/2021
+Last modified:  24/08/2021
+*/
+void printVictoryScreen(WINDOW* gameWindow);
+
+/*
+Method name:    printStartScreen
+Description:    Prints screen that introduces the simulator and displays Menu commands.
+Outputs:        n/a
+Inputs:         WINDOW gameWindow: game window where information will be printed
+Author:         Renato Pepe
+Creation date:  24/08/2021
+Last modified:  24/08/2021
+*/
+void printStartScreen(WINDOW* gameWindow);
 
