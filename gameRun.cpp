@@ -4,7 +4,7 @@
 /*                    and auxiliar methods are defined                   */
 /* Author name:      Renato Pepe       				                     */
 /* Creation date:    16/08/2021                                          */
-/* Revision date:    24/08/2021                                          */
+/* Revision date:    25/08/2021                                          */
 /* ***********************************************************************/
 
 
@@ -100,7 +100,7 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  18/08/2021
-Last modified:  24/08/2021
+Last modified:  25/08/2021
 */
 void gameLoop() {
 
@@ -190,7 +190,7 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  22/08/2021
-Last modified:  22/08/2021
+Last modified:  25/08/2021
 */
 void initColorPairs() {
 
@@ -264,7 +264,7 @@ Outputs:        n/a
 Inputs:         WINDOW gameWindow: game window where information will be printed
 Author:         Renato Pepe
 Creation date:  24/08/2021
-Last modified:  24/08/2021
+Last modified:  25/08/2021
 */
 void printDefeatScreen(WINDOW* gameWindow) {
     //Clear what was previously printed on the screen and box the screen

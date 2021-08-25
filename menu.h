@@ -5,7 +5,7 @@
 /*                    -menu let's user select and enter a game.           */
 /* Author name:      Renato Pepe       				                      */
 /* Creation date:    16/08/2021                                           */
-/* Revision date:    24/08/2021                                           */
+/* Revision date:    25/08/2021                                           */
 /* ************************************************************************/
 
 
@@ -20,6 +20,6 @@ Inputs:         float playerWallet: Player's current cash
 				WINDOW gameWindow: Curses window where simulator happens
 Author:         Renato Pepe
 Creation date:  16/08/2021
-Last modified:  24/08/2021
+Last modified:  25/08/2021
 */
 void screen_Menu(float& playerWallet, float& chipValue, gameState& state, WINDOW*& gameWindow);

@@ -6,7 +6,7 @@
 /*                     auxiliar methods and types are declared              */
 /* Author name:      Renato Pepe       				                        */
 /* Creation date:    16/08/2021                                             */
-/* Revision date:    24/08/2021                                             */
+/* Revision date:    25/08/2021                                             */
 /* **************************************************************************/
 
 
@@ -65,7 +65,7 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  18/08/2021
-Last modified:  20/08/2021
+Last modified:  25/08/2021
 */
 void gameLoop();
 
@@ -76,7 +76,7 @@ Outputs:        n/a
 Inputs:         n/a
 Author:         Renato Pepe
 Creation date:  22/08/2021
-Last modified:  22/08/2021
+Last modified:  25/08/2021
 */
 void initColorPairs();
 
@@ -123,7 +123,7 @@ Outputs:        n/a
 Inputs:         WINDOW gameWindow: game window where information will be printed
 Author:         Renato Pepe
 Creation date:  24/08/2021
-Last modified:  24/08/2021
+Last modified:  25/08/2021
 */
 void printStartScreen(WINDOW* gameWindow);
 

@@ -5,7 +5,7 @@
 /* File description: Header file where loot box game methods and types are declared */
 /* Author name:      Renato Pepe       				                                */
 /* Creation date:    24/08/2021                                                     */
-/* Revision date:    24/08/2021                                                     */
+/* Revision date:    25/08/2021                                                     */
 /* **********************************************************************************/
 
 
@@ -20,7 +20,7 @@ Outputs:        n/a
 Inputs:         WINDOW gameWindow: curses screen where game happens
 Author:         Renato Pepe
 Creation date:  24/08/2021
-Last modified:  24/08/2021
+Last modified:  25/08/2021
 */
 void lootBoxGameCommandsScreen(WINDOW*& gameWindow);
 

@@ -5,7 +5,7 @@
 /* File description: Header file where dice game methods and types are declared */
 /* Author name:      Renato Pepe       				                            */
 /* Creation date:    20/08/2021                                                 */
-/* Revision date:    24/08/2021                                                 */
+/* Revision date:    25/08/2021                                                 */
 /* ******************************************************************************/
 
 
@@ -33,7 +33,7 @@ Inputs:         float playerWallet: Player's current cash
                 WINDOW gameWindow: curses window where game happens
 Author:         Renato Pepe
 Creation date:  20/08/2021
-Last modified:  24/08/2021
+Last modified:  25/08/2021
 */
 void diceGameRun(float& playerWallet, float& chipValue, WINDOW*& gameWindow);
 
@@ -51,7 +51,7 @@ Inputs:         float playerWallet: Player's current stored cash
                 WINDOW gameWindow: curses screen where game happens
 Author:         Renato Pepe
 Creation date:  20/08/2021
-Last modified:  24/08/2021
+Last modified:  25/08/2021
 */
 void printDiceGameScreen(float playerWallet, float chipValue, float betValue, int playerBetNumber, int dieNumber, int playerBetHL, float thisRoundProfit, WINDOW*& gameWindow);
 
@@ -69,7 +69,7 @@ Inputs:         int userInput: stores user pressed key (obs: int so it can fit c
                 float thisRoundProfit: How much player won or lost this round
 Author:         Renato Pepe
 Creation date:  20/08/2021
-Last modified:  24/08/2021
+Last modified:  25/08/2021
 */
 void getAndHandleInputDiceGame(int userInput, float& playerWallet, float& chipValue, float& betValue, int& playerBetNumber, int& dieNumber, int& playerBetHL, float& thisRoundProfit);
 

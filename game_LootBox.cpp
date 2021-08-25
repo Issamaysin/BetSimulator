@@ -3,7 +3,7 @@
 /* File description: Cpp file where loot box game methods are defined    */
 /* Author name:      Renato Pepe       				                     */
 /* Creation date:    24/08/2021                                          */
-/* Revision date:    24/08/2021                                          */
+/* Revision date:    25/08/2021                                          */
 /* ***********************************************************************/
 
 
@@ -39,7 +39,7 @@ Outputs:        n/a
 Inputs:         WINDOW gameWindow: curses screen where game happens
 Author:         Renato Pepe
 Creation date:  24/08/2021
-Last modified:  24/08/2021
+Last modified:  25/08/2021
 */
 void lootBoxGameCommandsScreen(WINDOW*& gameWindow) {
     //Clear what was previously printed on the screen and box the screen
