@@ -266,7 +266,7 @@ void printDiceGameScreen(float playerWallet, float chipValue, float betValue, in
 
     //Draw profit 
     line++;
-    mvwprintw(gameWindow, line++, drawDieXPosition - 8, "Round profit total: $ ");
+    mvwprintw(gameWindow, line++, drawDieXPosition - 12, "Round total profit: $");
     if (0 < thisRoundProfit) {
         wattron(gameWindow, COLOR_PAIR(CP_GREEN));
         waddch(gameWindow, '+');
