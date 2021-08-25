@@ -26,6 +26,12 @@ enum class gameState {MENU,      //Main menu where games are selected
 #define CP_ORANGE   4
 #define CP_PURPLE   5
 
+//Screen proportions
+#define screen_Height 20
+#define screen_Width 60
+//Number of games currently implemented
+#define numberOfGames 2
+
 /*
     Function declarations
 */

@@ -19,6 +19,7 @@
 #include "gameRun.h"
 #include "menu.h"
 #include "game_Dice.h"
+#include "game_LootBox.h"
 
 /*
     Frequently used namespaces.
@@ -163,7 +164,7 @@ void gameLoop() {
             currentState = gameState::MENU;
             break;
         case gameState::GAME2:
-            //run game 2
+            lootBoxGameRun(playerWallet, chipValue, gameWindow);
             currentState = gameState::MENU;
             break;
         default:
@@ -172,6 +173,8 @@ void gameLoop() {
             break;
         }
 
+        //Change rand() seed to maximize randomness.
+        srand(static_cast<unsigned int>(std::time(nullptr)));
     }
 
     //Delete screen (free memory)
@@ -192,6 +195,10 @@ void initColorPairs() {
 
     init_pair(CP_RED, COLOR_RED, COLOR_BLACK);
     init_pair(CP_GREEN, COLOR_GREEN, COLOR_BLACK);
+    init_pair(CP_ORANGE, 202, COLOR_BLACK);
+    init_pair(CP_PURPLE, 13, COLOR_BLACK);
+    init_pair(CP_BLUE, COLOR_BLUE, COLOR_BLACK);
+
 }
 
 /*
@@ -260,6 +267,8 @@ Last modified:  24/08/2021
 */
 void printDefeatScreen(WINDOW* gameWindow) {
     //Clear what was previously printed on the screen and box the screen
+    wclear(stdscr);
+    wrefresh(stdscr);
     wclear(gameWindow);
     wrefresh(gameWindow);
     box(gameWindow, 0, 0);
@@ -270,7 +279,7 @@ void printDefeatScreen(WINDOW* gameWindow) {
     mvwprintw(gameWindow, line++, 18, "G A M E   O V E R");
     wattroff(gameWindow, COLOR_PAIR(CP_RED));
     line++;
-    mvwprintw(gameWindow, line++, 7, "You gambled away all your money and lost.");
+    mvwprintw(gameWindow, line++, 7, "You gambled all your money away and lost.");
     chtype sadFaceAux = ' ' | A_REVERSE;
     mvwaddch(gameWindow, 10, 24, sadFaceAux);
     mvwaddch(gameWindow, 12, 24, sadFaceAux);
@@ -299,6 +308,8 @@ Last modified:  24/08/2021
 */
 void printVictoryScreen(WINDOW* gameWindow) {
     //Clear what was previously printed on the screen and box the screen
+    wclear(stdscr);
+    wrefresh(stdscr);
     wclear(gameWindow);
     wrefresh(gameWindow);
     box(gameWindow, 0, 0);
@@ -334,6 +345,8 @@ Last modified:  24/08/2021
 */
 void printStartScreen(WINDOW* gameWindow) {
     //Clear what was previously printed on the screen and box the screen
+    wclear(stdscr);
+    wrefresh(stdscr);
     wclear(gameWindow);
     wrefresh(gameWindow);
     box(gameWindow, 0, 0);
@@ -344,7 +357,6 @@ void printStartScreen(WINDOW* gameWindow) {
     mvwprintw(gameWindow, line++, 1, "-You can select between the available games to make bets.");
     line++;
     mvwprintw(gameWindow, line++, 1, "-Menu controls:");
-    line++;
     mvwprintw(gameWindow, line++, 2, "UP/DOWN arrows: select between games");
     mvwprintw(gameWindow, line++, 2, "E:              enter a game");
     mvwprintw(gameWindow, line++, 2, "X:              exit simulator");
