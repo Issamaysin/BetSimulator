@@ -20,7 +20,7 @@ Outputs:        n/a
 Inputs:         WINDOW gameWindow: curses screen where game happens
 Author:         Renato Pepe
 Creation date:  20/08/2021
-Last modified:  21/08/2021
+Last modified:  24/08/2021
 */
 void diceGameCommandsScreen(WINDOW *& gameWindow);
 

@@ -37,10 +37,12 @@ Outputs:        n/a
 Inputs:         WINDOW gameWindow: curses screen where game happens
 Author:         Renato Pepe
 Creation date:  20/08/2021
-Last modified:  21/08/2021
+Last modified:  24/08/2021
 */
 void diceGameCommandsScreen(WINDOW*& gameWindow) {
     //Clear what was previously printed on the screen and box the screen
+    wclear(stdscr);
+    wrefresh(stdscr);
     wclear(gameWindow);
     wrefresh(gameWindow);
     box(gameWindow, 0, 0);
@@ -57,7 +59,6 @@ void diceGameCommandsScreen(WINDOW*& gameWindow) {
     mvwprintw(gameWindow, line++, 1, "(if both bet types are made the bet will be divided)");
     line++;
     mvwprintw(gameWindow, line++, 1, "-Controls:");
-    line++;
     mvwprintw(gameWindow, line++, 1, "1/2/3/4/5/6 => choose a number");
     mvwprintw(gameWindow, line++, 1, "H/L         => choose a High/Low");
     mvwprintw(gameWindow, line++, 1, "0           => reset bet");
@@ -107,18 +108,21 @@ void diceGameRun(float& playerWallet, float& chipValue, WINDOW*& gameWindow) {
         if (betValue > playerWallet) {
             betValue = playerWallet;
         }
-        //If player reached $0 he 'lost' the game, break this loop and handle defeat on main game loop
-        if (0 >= playerWallet) {
-            break;
-        }
-        //If player reached $999.999 he 'won' the game, break this loop and handle victory on main game loop
-        if (999999.0f <= playerWallet) {
-            break;
-        }
 
         //Print data on screen
         printDiceGameScreen(playerWallet, chipValue, betValue, playerBetNumber, dieNumber, playerBetHL, thisRoundProfit, gameWindow);
         
+        //If player reached $0 he 'lost' the game, break this loop and handle defeat on main game loop
+        if (0 >= playerWallet) {
+            _getch();
+            break;
+        }
+        //If player reached $999.999 he 'won' the game, break this loop and handle victory on main game loop
+        if (999999.0f <= playerWallet) {
+            _getch();
+            break;
+        }
+
         //Get user input and respond accordingly
         userInput = wgetch(gameWindow);
         getAndHandleInputDiceGame(userInput, playerWallet, chipValue, betValue, playerBetNumber, dieNumber, playerBetHL, thisRoundProfit);
@@ -144,6 +148,8 @@ Last modified:  24/08/2021
 */
 void printDiceGameScreen(float playerWallet, float chipValue, float betValue, int playerBetNumber, int dieNumber, int playerBetHL, float thisRoundProfit, WINDOW *& gameWindow) {
     //Clear what was previously printed on the screen and box the screen
+    wclear(stdscr);
+    wrefresh(stdscr);
     wclear(gameWindow);
     wrefresh(gameWindow);
     box(gameWindow, 0, 0);
@@ -182,10 +188,12 @@ void printDiceGameScreen(float playerWallet, float chipValue, float betValue, in
         wprintw(gameWindow, "Low");
     }
 
-    //Draw die
+    /*
+        Draw die
+    */
     line = 5;
     int drawDieXPosition = screen_Width - 25;
-
+    //Draw upper line
     wattron(gameWindow, A_ALTCHARSET);
     mvwaddch(gameWindow, line++, drawDieXPosition, 108);
     waddch(gameWindow, 113);
@@ -196,6 +204,7 @@ void printDiceGameScreen(float playerWallet, float chipValue, float betValue, in
     waddch(gameWindow, 107);
     wattroff(gameWindow, A_ALTCHARSET);
 
+    //Draw die interior
     switch (dieNumber) {
     case 1:
 
@@ -236,6 +245,7 @@ void printDiceGameScreen(float playerWallet, float chipValue, float betValue, in
         break;
     }
 
+    //Draw side lines
     wattron(gameWindow, A_ALTCHARSET);
     mvwaddch(gameWindow, line - 3, drawDieXPosition, 120);
     mvwaddch(gameWindow, line - 2, drawDieXPosition, 120);
@@ -244,6 +254,7 @@ void printDiceGameScreen(float playerWallet, float chipValue, float betValue, in
     mvwaddch(gameWindow, line - 2, drawDieXPosition + 6, 120);
     mvwaddch(gameWindow, line - 1, drawDieXPosition + 6, 120);
 
+    //Draw bottom line
     mvwaddch(gameWindow, line++, drawDieXPosition, 109);
     waddch(gameWindow, 113);
     waddch(gameWindow, 113);
