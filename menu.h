@@ -8,14 +8,7 @@
 /* Revision date:    24/08/2021                                           */
 /* ************************************************************************/
 
-//#include "gameRun.h"
 
-/*
-	Defines and enums
-*/
-#define screen_Height 20
-#define screen_Width 60
-#define numberOfGames 2
 
 /*
 Method name:    screen_Menu

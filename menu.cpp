@@ -40,6 +40,8 @@ Last modified:  24/08/2021
 */
 void screen_Menu(float& playerWallet, float& chipValue, gameState& state, WINDOW *&gameWindow) {
     //Clear what was previously printed on the screen and box the screen
+    wclear(stdscr);
+    wrefresh(stdscr);
     wclear(gameWindow);
     wrefresh(gameWindow);
     box(gameWindow, 0, 0);
