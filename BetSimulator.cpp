@@ -14,11 +14,10 @@ int main()
     //Initial setup
     gameInit();
 
-    //test menu screen
+    //Run game
     gameLoop();
     
-    
-    
+    //Close curses screen
     endwin();
     return 0;
 }
