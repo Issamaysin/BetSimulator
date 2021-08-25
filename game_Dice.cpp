@@ -363,6 +363,7 @@ void getAndHandleInputDiceGame(int userInput, float& playerWallet, float& chipVa
     //Make a bet
     case 'e':
     case 'E':
+    case '\n':
         //Check if at least one bet type was placed, otherwise do nothing
         if (playerBetHL != 0 || playerBetNumber != 0) {
             //Draw die and update round profit

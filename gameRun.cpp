@@ -129,7 +129,7 @@ void gameLoop() {
     //Game state that defines what is running (what game or menu)
     gameState currentState = gameState::MENU;
     //Player cash, starts as $2000.00
-    float playerWallet = 2000.0f;
+    float playerWallet = 4000.0f;
     //Chip value starts at $100.
     float chipValue = 100.0f;
 
@@ -141,7 +141,7 @@ void gameLoop() {
             printDefeatScreen(gameWindow);
 
             //Reset values to default so it can start again.
-            playerWallet = 2000.0f;
+            playerWallet = 4000.0f;
             chipValue = 100.0f;
         }
         //check if player won (Wallet = 999999), print a victory screen, reset values to default, and start again
@@ -150,7 +150,7 @@ void gameLoop() {
             printVictoryScreen(gameWindow);
 
             //Reset values to default so it can start again.
-            playerWallet = 2000.0f;
+            playerWallet = 4000.0f;
             chipValue = 100.0f;
         }
 
@@ -175,6 +175,7 @@ void gameLoop() {
 
         //Change rand() seed to maximize randomness.
         srand(static_cast<unsigned int>(std::time(nullptr)));
+        rand();
     }
 
     //Delete screen (free memory)

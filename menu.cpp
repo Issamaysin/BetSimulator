@@ -98,7 +98,7 @@ void screen_Menu(float& playerWallet, float& chipValue, gameState& state, WINDOW
             return;
             break;
         }
-        else if (key == 'e' || key == 'E') {
+        else if (key == 'e' || key == 'E' || key == '\n') {
             break;
         }
         else {

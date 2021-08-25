@@ -25,7 +25,7 @@ using std::string;
 /*
     Function declarations for this file.
 */
-//testing boxChance balance 
+//testing boxChance balance, won't be here when lootbox game starts to get made.
 void testBoxChance();
 
 int main()
@@ -39,7 +39,6 @@ int main()
     
     
     endwin();
-    _getch();
     return 0;
 }
 
