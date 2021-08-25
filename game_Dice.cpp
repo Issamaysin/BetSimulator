@@ -267,18 +267,18 @@ void printDiceGameScreen(float playerWallet, float chipValue, float betValue, in
     //Draw profit 
     line++;
     mvwprintw(gameWindow, line++, drawDieXPosition - 8, "Round profit total: $ ");
-    if (0 <= thisRoundProfit) {
+    if (0 < thisRoundProfit) {
         wattron(gameWindow, COLOR_PAIR(CP_GREEN));
         waddch(gameWindow, '+');
-        wprintw(gameWindow, (std::to_string((int)thisRoundProfit)).c_str());
-        wattroff(gameWindow, COLOR_PAIR(CP_GREEN));
     }
-    else {
+    else if(0 > thisRoundProfit){
         wattron(gameWindow, COLOR_PAIR(CP_RED));
-        wprintw(gameWindow, (std::to_string((int)thisRoundProfit)).c_str());
-        wattroff(gameWindow, COLOR_PAIR(CP_RED));
+
     }
 
+    wprintw(gameWindow, (std::to_string((int)thisRoundProfit)).c_str());
+    wattroff(gameWindow, COLOR_PAIR(CP_GREEN));
+    wattroff(gameWindow, COLOR_PAIR(CP_RED));
     wrefresh(gameWindow);
 }
 
