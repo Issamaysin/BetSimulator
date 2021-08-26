@@ -50,18 +50,18 @@ int startCurses() {
     noecho();
     cbreak();
 
+    //Remove blinking cursor indicator and start keypad mode (can read keyboard arrows)
+    curs_set(0);
+    keypad(stdscr, TRUE);
+
     //Start color mode, if terminal can't support colors exit program and give a warning
-    if (!has_colors) {
+    if (false == has_colors()) {
         cout << "Terminal doesnt have colors :(" << std::endl;
         _getch();
         return 0;
     }
     start_color();
     refresh();
-
-    //Remove blinking cursor indicator and start keypad mode (can read keyboard arrows)
-    curs_set(0);
-    keypad(stdscr, TRUE);
 
     return 1;
 }
